@@ -1,0 +1,53 @@
+method: texnet
+data:
+  path_shapes: data/shapenet/synthetic_cars_nospecular/
+  dataset_imgs_type: image_folder
+  img_size: 128
+training:
+  out_dir: 'out/GAN/car'
+  batch_size: 32
+  model_selection_metric: null
+  model_selection_mode: maximize
+  print_every: 10
+  visualize_every: 100
+  checkpoint_every: 1000
+  validate_every: 1000
+  backup_every: 10000
+  moving_average_beta: 0.99
+  gradient_penalties_reg: 10.
+  lr_g: 0.0001
+  lr_d: 0.0001
+  multi_gpu: false
+  vis_fixviews: True
+  weight_pixelloss: 0.
+  weight_ganloss: 1.
+  weight_vaeloss: 0.
+  experiment: 'generative'
+model:
+  decoder: each_layer_c
+  encoder:
+  geometry_encoder: simple
+  discriminator: resnet_conditional
+  vae_encoder:
+  encoder_kwargs:
+  vae_encoder_kwargs:
+  decoder_kwargs:
+    leaky: True
+  geometry_encoder_kwargs:
+    leaky: True
+  generator_bg_kwargs:
+    leaky: True
+  discriminator_kwargs:
+    leaky: True
+  z_dim: 64
+  c_dim: 512
+  white_bg: True
+  model_url: 'https://s3.eu-central-1.amazonaws.com/avg-projects/texture_fields/models/gan_car-360b7ce7.pt'
+generation:
+  batch_size: 10
+test:
+  model_file: model.pt
+  vis_dir: 'out/GAN/car/eval_fix'
+  dataset_split: 'test_vis' 
+  with_occnet: False
+

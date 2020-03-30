@@ -1,0 +1,44 @@
+method: nvs
+data:
+  path_shapes: data/shapenet/synthetic_cars_nospecular/
+  dataset_imgs_type: image_folder
+  img_size: 256
+training:
+  out_dir: 'out/nvs/car'
+  batch_size: 32
+  model_selection_metric: loss_val
+  model_selection_mode: minimize
+  print_every: 100
+  visualize_every: 10000
+  checkpoint_every: 10000
+  validate_every: 10000
+  backup_every: 100000
+  moving_average_beta: 0
+  pc_subsampling: 2048
+  vis_fixviews: True
+  gradient_penalties_reg: 0.
+  weight_pixelloss: 1.
+  weight_ganloss: 0.
+  experiment: 'conditional'
+model:
+  decoder: each_layer_c
+  encoder: resnet18
+  geometry_encoder: null
+  generator_bg: null
+  discriminator: resnet
+  decoder_kwargs: {}
+  encoder_kwargs: {}
+  geometry_encoder_kwargs: {}
+  generator_bg_kwargs: {}
+  discriminator_kwargs: {}
+  z_dim: 0
+  c_dim: 512
+  white_bg: True
+generation:
+  batch_size: 32
+test:
+  model_file: model_best.pt
+  vis_dir: 'out/nvs/car/eval_fix'
+  dataset_split: 'test_vis' 
+  with_occnet: False
+  generation_mode: 'HD'

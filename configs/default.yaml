@@ -1,0 +1,58 @@
+method: texnet
+data:
+  path_imgs: null
+  path_shapes: null
+  dataset_imgs_type: image_folder
+  shapes_multiclass: false 
+  classes_shapes: null
+  classes_imgs: null
+  img_size: 64
+  pcl_knn: null
+  with_shuffle: True
+training:
+  out_dir: 'out'
+  batch_size: 64
+  model_selection_metric: none
+  model_selection_mode: maximize
+  print_every: 100
+  visualize_every: 1000
+  checkpoint_every: 1000
+  validate_every: 10000
+  backup_every: 10000
+  moving_average_beta: null
+  lr_g: 0.0001
+  lr_d: 0.0001
+  gradient_penalties_reg: 10.
+  multi_gpu: false
+  pc_subsampling: 2048
+  vis_fixviews: 
+  weight_pixelloss: 0.0
+  weight_ganloss: 0.0
+  weight_vaeloss: 0.0
+model:
+  decoder: simple
+  geometry_encoder: simple
+  generator_bg: resnet
+  discriminator: resnet_conditional
+  vae_encoder:
+  decoder_kwargs:
+    resnet_leaky: True
+  geometry_encoder_kwargs: {}
+  generator_bg_kwargs: {}
+  discriminator_kwargs: {}
+  vae_encoder_kwargs: {}
+  z_dim: 128
+  c_dim: 128
+  white_bg: False
+  gan_setting: conditional
+  model_url:
+test:
+  model_file: model_best.pt
+  vis_dir: 
+  for_eval: False
+  dataset_split: 'test' 
+  for_vis: False
+  with_occnet: False
+  interpol: False
+  generate_grid: False
+  generation_mode: 'HD'

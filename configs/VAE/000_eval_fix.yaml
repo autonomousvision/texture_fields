@@ -1,0 +1,14 @@
+method: texnet
+inherit_from: configs/VAE/000.yaml
+data:
+  img_size: 128
+training:
+  vis_fixviews: True
+generation:
+  batch_size: 3
+test:
+  model_file: model.pt
+  vis_dir: 'out/VAE/car/eval_fix'
+  dataset_split: 'test_vis' 
+  with_occnet: False
+  generation_mode: 'vae'

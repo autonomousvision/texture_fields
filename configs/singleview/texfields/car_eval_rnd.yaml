@@ -1,0 +1,16 @@
+method: texnet
+inherit_from: configs/singleview/texfields/car.yaml
+data:
+  # path_shapes: data//02958343/
+  dataset_imgs_type: image_folder
+  img_size: 256
+model:
+  model_url: 'https://s3.eu-central-1.amazonaws.com/avg-projects/texture_fields/models/car-b3b2a506.pt'
+generation:
+  batch_size: 100
+test:
+  model_file: model_best.pt
+  vis_dir: 'out/singleview/car/eval_rnd'
+  dataset_split: 'test_eval' 
+  with_occnet: False
+  generation_mode: 'HD'

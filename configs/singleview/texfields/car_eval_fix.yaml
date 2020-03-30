@@ -1,0 +1,15 @@
+method: texnet
+inherit_from: configs/singleview/texfields/car.yaml
+data:
+  # path_shapes: data/synthetic_combined/02958343
+  dataset_imgs_type: image_folder
+  img_size: 256
+model:
+  model_url: 'https://s3.eu-central-1.amazonaws.com/avg-projects/texture_fields/models/car-b3b2a506.pt'
+generation:
+  batch_size: 1
+test:
+  vis_dir: 'out/singleview/car/eval_fix'
+  dataset_split: 'test_vis' 
+  with_occnet: False
+  generation_mode: 'HD'

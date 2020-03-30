@@ -1,0 +1,48 @@
+method: texnet
+data:
+  path_shapes: data/shapenet/synthetic_cars_nospecular/
+  dataset_imgs_type: image_folder
+  img_size: 128
+training:
+  out_dir: 'out/VAE/car'
+  batch_size: 3
+  model_selection_metric: null
+  model_selection_mode: maximize
+  print_every: 100
+  visualize_every: 1000
+  checkpoint_every: 1000
+  validate_every: 1000
+  backup_every: 1000000
+  moving_average_beta: 0
+  pc_subsampling: 2048
+  vis_fixviews: True
+  weight_pixelloss: 1.
+  weight_ganloss: 0.
+  weight_vaeloss: 10.
+  experiment: 'generative'
+  gradient_penalties_reg: 0.
+model:
+  decoder: each_layer_c
+  encoder: 
+  vae_encoder: resnet
+  geometry_encoder: simple
+  decoder_kwargs:
+    leaky: True
+    resnet_leaky: True
+  encoder_kwargs: {}
+  vae_encoder_kwargs:
+    leaky: True
+  geometry_encoder_kwargs:
+    leaky: True
+  z_dim: 512
+  c_dim: 512
+  white_bg: True
+  model_url: 'https://s3.eu-central-1.amazonaws.com/avg-projects/texture_fields/models/vae_car-f141e128.pt'
+
+generation:
+  batch_size: 3
+test:
+  model_file: model.pt
+  vis_dir: 'out/VAE/car/eval_vis'
+  dataset_split: 'test_vis' 
+  with_occnet: False
